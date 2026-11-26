@@ -1,0 +1,36 @@
+// =============================================================================
+// Ponto de entrada dos estilos globais
+// -----------------------------------------------------------------------------
+// Ordem: temas (propriedades CSS) → reset → tipografia → regras globais.
+// Componentes futuros podem usar `@use '<caminho>/styles/variables' as *;`
+// para acessar mixins (ex.: `breakpoint-up`) e devem consumir as cores e
+// dimensões via `var(--...)`.
+// =============================================================================
+
+@use './themes';
+@use './reset';
+@use './typography';
+
+body {
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::selection {
+  color: var(--color-text);
+  background: var(--color-selection);
+}
+
+// Foco visível e consistente para navegação por teclado.
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}

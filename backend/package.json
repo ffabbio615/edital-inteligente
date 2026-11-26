@@ -1,0 +1,33 @@
+{
+  "name": "edital-inteligente-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Backend (API REST) da plataforma Edital Inteligente",
+  "main": "dist/server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/server.js",
+    "type-check": "tsc --noEmit",
+    "test": "tsx --test src/database/transaction.test.ts src/middlewares/integration-auth.middleware.test.ts src/middlewares/error.middleware.test.ts src/integrations/n8n/n8n.schemas.test.ts src/integrations/n8n/n8n.service.test.ts src/integrations/n8n/n8n.controller.test.ts src/integrations/n8n/n8n.routes.test.ts src/integrations/n8n/n8n.service.integration.test.ts src/opportunities/opportunities.schemas.test.ts src/opportunities/opportunities.service.test.ts src/opportunities/opportunities.routes.test.ts src/opportunities/opportunities.service.integration.test.ts",
+    "test:integration": "tsx --test src/integrations/n8n/n8n.service.integration.test.ts src/opportunities/opportunities.service.integration.test.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "pg": "^8.13.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.2",
+    "@types/pg": "^8.11.10",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

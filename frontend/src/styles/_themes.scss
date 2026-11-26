@@ -1,0 +1,147 @@
+// =============================================================================
+// Temas e propriedades CSS customizadas
+// -----------------------------------------------------------------------------
+// Converte os tokens primitivos de `_variables.scss` em propriedades CSS
+// (`--...`). Os componentes devem consumir somente estas propriedades.
+//
+// - Tokens de escala (espaço, raio, fonte...) são iguais em todos os temas.
+// - Tokens semânticos de cor mudam por tema.
+//
+// Tema claro: padrão, aplicado em `:root`.
+// Tema escuro: preparado, ativado com `data-theme="dark"` no elemento <html>.
+//   Ainda não há seletor visual; para ativar automaticamente pela preferência
+//   do sistema no futuro, basta incluir `@include dark-theme;` dentro de
+//   `@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) {...} }`.
+// =============================================================================
+
+@use 'sass:map';
+@use './variables' as *;
+
+// -----------------------------------------------------------------------------
+// Definição dos temas (nome semântico → valor)
+// -----------------------------------------------------------------------------
+$theme-light: (
+  // Fundo e superfícies
+  'bg': palette('gray-50'),
+  'surface': palette('white'),
+  'surface-muted': palette('gray-100'),
+  'surface-raised': palette('white'),
+
+  // Texto
+  'text': palette('gray-900'),
+  'text-secondary': palette('gray-500'),
+  'text-inverse': palette('white'),
+
+  // Bordas
+  'border': palette('gray-200'),
+  'border-strong': palette('gray-400'),
+
+  // Ação principal
+  'primary': palette('blue-600'),
+  'primary-hover': palette('blue-700'),
+  'primary-soft': palette('blue-50'),
+  'on-primary': palette('white'),
+
+  // Estados
+  'success': palette('green-600'),
+  'success-soft': palette('green-50'),
+  'warning': palette('amber-700'),
+  'warning-soft': palette('amber-50'),
+  'danger': palette('red-600'),
+  'danger-soft': palette('red-50'),
+
+  // Foco e seleção
+  'focus-ring': palette('blue-600'),
+  'selection': palette('blue-50'),
+);
+
+$theme-dark: (
+  'bg': palette('navy-900'),
+  'surface': palette('navy-850'),
+  'surface-muted': palette('navy-800'),
+  'surface-raised': palette('navy-800'),
+
+  'text': palette('navy-text'),
+  'text-secondary': palette('navy-muted'),
+  'text-inverse': palette('navy-900'),
+
+  'border': palette('navy-700'),
+  'border-strong': palette('navy-500'),
+
+  'primary': palette('blue-400'),
+  'primary-hover': palette('blue-300'),
+  'primary-soft': palette('blue-900'),
+  'on-primary': palette('navy-900'),
+
+  'success': palette('green-400'),
+  'success-soft': palette('green-900'),
+  'warning': palette('amber-400'),
+  'warning-soft': palette('amber-900'),
+  'danger': palette('red-400'),
+  'danger-soft': palette('red-900'),
+
+  'focus-ring': palette('blue-400'),
+  'selection': palette('blue-900'),
+);
+
+// -----------------------------------------------------------------------------
+// Mixins de emissão
+// -----------------------------------------------------------------------------
+
+/// Gera `--{prefixo}-{chave}: valor` para cada item do mapa.
+@mixin emit-tokens($prefix, $map) {
+  @each $key, $value in $map {
+    --#{$prefix}-#{$key}: #{$value};
+  }
+}
+
+/// Tokens que não dependem do tema.
+@mixin scale-tokens {
+  --font-family-base: #{$font-family-base};
+  --font-family-mono: #{$font-family-mono};
+
+  @include emit-tokens('font-size', $font-sizes);
+  @include emit-tokens('font-weight', $font-weights);
+  @include emit-tokens('line-height', $line-heights);
+  @include emit-tokens('space', $spacing);
+  @include emit-tokens('border-width', $border-widths);
+  @include emit-tokens('radius', $radii);
+  @include emit-tokens('duration', $transition-durations);
+
+  --easing-standard: #{$transition-easing};
+  --container-max-width: #{$container-max-width};
+  --focus-ring-width: #{$focus-ring-width};
+  --focus-ring-offset: #{$focus-ring-offset};
+}
+
+/// Tema claro (padrão).
+@mixin light-theme {
+  color-scheme: light;
+
+  @include emit-tokens('color', $theme-light);
+
+  --shadow-sm: 0 2px 8px #{$shadow-color-light};
+  --shadow-md: 0 6px 20px #{$shadow-color-light-strong};
+}
+
+/// Tema escuro (preparado, ainda sem seletor visual).
+@mixin dark-theme {
+  color-scheme: dark;
+
+  @include emit-tokens('color', $theme-dark);
+
+  --shadow-sm: 0 2px 8px #{$shadow-color-dark};
+  --shadow-md: 0 6px 20px #{$shadow-color-dark-strong};
+}
+
+// -----------------------------------------------------------------------------
+// Saída
+// -----------------------------------------------------------------------------
+:root {
+  @include scale-tokens;
+  @include light-theme;
+}
+
+:root[data-theme='dark'] {
+  @include dark-theme;
+}
