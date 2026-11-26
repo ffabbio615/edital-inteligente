@@ -1,0 +1,87 @@
+@use '../../../styles/variables' as *;
+
+// Celular: uma coluna (instituição, categoria, situação, buscar, limpar).
+// A partir de sm: instituição + buscar na primeira linha; categoria, situação e limpar na segunda.
+.form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 40rem;
+  padding: var(--space-2);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+
+  @include breakpoint-up('sm') {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    grid-template-areas:
+      'institution institution submit'
+      'category status clear';
+    align-items: center;
+  }
+}
+
+// Rótulo visível apenas para leitores de tela; o placeholder não substitui o label.
+.label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.input,
+.select {
+  min-width: 0;
+  min-height: 3rem;
+  padding: var(--space-2) var(--space-4);
+  border: var(--border-width-thin) solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  background: var(--color-surface);
+  font: inherit;
+}
+
+.input {
+  @include breakpoint-up('sm') {
+    grid-area: institution;
+  }
+
+  &::placeholder {
+    color: var(--color-text-secondary);
+  }
+
+  @include breakpoint-up('sm') {
+    border-color: transparent;
+  }
+}
+
+.select {
+  cursor: pointer;
+}
+
+.submit,
+.clear {
+  width: 100%;
+}
+
+@include breakpoint-up('sm') {
+  .submit {
+    grid-area: submit;
+  }
+
+  .clear {
+    grid-area: clear;
+  }
+
+  .category {
+    grid-area: category;
+  }
+
+  .status {
+    grid-area: status;
+  }
+}

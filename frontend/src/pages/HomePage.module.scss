@@ -1,0 +1,87 @@
+@use '../styles/variables' as *;
+
+// Compensa o header fixo ao navegar pelas âncoras.
+%anchor-offset {
+  scroll-margin-top: 6rem;
+}
+
+// ----- Hero -----
+.hero {
+  @extend %anchor-offset;
+
+  padding-block: var(--space-12);
+  background: linear-gradient(180deg, var(--color-primary-soft) 0%, var(--color-bg) 100%);
+  border-bottom: var(--border-width-thin) solid var(--color-border);
+
+  @include breakpoint-up('md') {
+    padding-block: var(--space-16);
+  }
+}
+
+.heroInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.eyebrow {
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+}
+
+.heroTitle {
+  max-width: 48rem;
+  margin-bottom: var(--space-4);
+}
+
+.heroText {
+  max-width: 42rem;
+  margin-bottom: var(--space-8);
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+}
+
+// ----- Seções -----
+.section {
+  @extend %anchor-offset;
+
+  padding-block: var(--space-12);
+
+  @include breakpoint-up('md') {
+    padding-block: var(--space-16);
+  }
+}
+
+.sectionAlt {
+  // Superfície branca (e não --color-surface-muted) para manter o texto
+  // secundário acima do contraste mínimo de 4,5:1.
+  background: var(--color-surface);
+  border-block: var(--border-width-thin) solid var(--color-border);
+}
+
+%grid-reset {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.categoryGrid {
+  @extend %grid-reset;
+
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+}
+
+.opportunityGrid {
+  @extend %grid-reset;
+
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+
+  @include breakpoint-up('md') {
+    gap: var(--space-6);
+  }
+}

@@ -1,0 +1,224 @@
+@use '../../../styles/variables' as *;
+
+// Mesmo painel de "Dados oficiais" (borda, raio, sombra), com faixa de alerta à esquerda e
+// fundo atenuado: a análise da IA nunca se confunde com os dados oficiais.
+.section {
+  padding: var(--space-6);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-left: var(--space-1) solid var(--color-warning);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-muted);
+  box-shadow: var(--shadow-sm);
+
+  @include breakpoint-up('md') {
+    padding: var(--space-8);
+  }
+}
+
+.heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-xl);
+}
+
+.notice {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-warning-soft);
+  font-size: var(--font-size-sm);
+  color: var(--color-warning);
+}
+
+.reviewNote {
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+}
+
+.message {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.block {
+  padding-top: var(--space-6);
+  border-top: var(--border-width-thin) solid var(--color-border);
+}
+
+.content > .block:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.blockTitle {
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-size-md);
+}
+
+.blockNote {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.text {
+  margin: 0;
+  white-space: pre-line;
+}
+
+.fields {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+
+  @include breakpoint-up('sm') {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-6);
+  }
+}
+
+.field {
+  dt {
+    margin-bottom: var(--space-1);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  dd {
+    margin: 0;
+    font-weight: var(--font-weight-semibold);
+    overflow-wrap: anywhere;
+  }
+}
+
+.fieldWide {
+  grid-column: 1 / -1;
+
+  dd {
+    font-weight: var(--font-weight-regular);
+  }
+}
+
+.valueList {
+  margin: 0;
+  padding-left: var(--space-5);
+  overflow-wrap: anywhere;
+
+  li + li {
+    margin-top: var(--space-1);
+  }
+}
+
+.evidence {
+  padding-top: var(--space-6);
+  border-top: var(--border-width-thin) solid var(--color-border);
+}
+
+.evidenceSummary {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-primary-hover);
+  }
+}
+
+.evidenceNote {
+  margin: var(--space-3) 0 var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.evidenceList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.evidenceItem {
+  padding: var(--space-4);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+
+.evidenceHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.evidenceField {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.excerpt {
+  margin: 0;
+  padding-left: var(--space-3);
+  border-left: var(--border-width-thick) solid var(--color-border-strong);
+  font-style: italic;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+.evidenceMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.externalLink {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+
+  &:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+  }
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  margin: var(--space-6) 0 0;
+  padding-top: var(--space-4);
+  border-top: var(--border-width-thin) solid var(--color-border);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}

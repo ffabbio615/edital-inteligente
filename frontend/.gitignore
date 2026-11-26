@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Variáveis de ambiente locais (.env, .env.local, .env.production etc.).
+# Somente o modelo .env.example é versionado.
+.env
+.env.*
+!.env.example

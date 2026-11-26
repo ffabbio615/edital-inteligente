@@ -1,0 +1,82 @@
+@use '../styles/variables' as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--color-surface);
+  border-bottom: var(--border-width-thin) solid var(--color-border);
+}
+
+// Mobile: logo e botão na primeira linha, navegação na segunda.
+.inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'logo account'
+    'nav nav';
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  padding-block: var(--space-3);
+
+  @include breakpoint-up('md') {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: 'logo nav account';
+    gap: var(--space-8);
+    min-height: 4rem;
+    padding-block: var(--space-2);
+  }
+}
+
+.logo {
+  grid-area: logo;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.logoMark {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+}
+
+.nav {
+  grid-area: nav;
+}
+
+.navList {
+  display: flex;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navLink {
+  display: inline-block;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  transition: color var(--duration-fast) var(--easing-standard),
+    background-color var(--duration-fast) var(--easing-standard);
+
+  &:hover {
+    color: var(--color-text);
+    background: var(--color-surface-muted);
+  }
+}
+
+.account {
+  grid-area: account;
+}

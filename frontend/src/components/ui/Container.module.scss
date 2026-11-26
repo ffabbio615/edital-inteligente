@@ -1,0 +1,12 @@
+@use '../../styles/variables' as *;
+
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+
+  @include breakpoint-up('md') {
+    padding-inline: var(--space-6);
+  }
+}
